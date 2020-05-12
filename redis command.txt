@@ -1,0 +1,2 @@
+docker run --name garden-of-eden-redis -v C:\work\docker\volumes\garden-of-eden-redis:/data -p 6379:6379 -d redis redis-server --appendonly yes
+docker restart garden-of-eden-redis
