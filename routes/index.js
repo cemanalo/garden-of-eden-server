@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const roomService = require('../services/room')
 const userService = require('../services/user')
-const redisUtils = require('../services/redisUtils')
 const gameStatus = require('../utils/gameStatus')
 
 router.post('/room', async (req, res) => {
@@ -137,11 +136,5 @@ router.put('/room/:roomId/endGame', async (req, res) => {
   const room = await roomService.updateRoomStatus(gameStatus.END, roomId)
   res.send(room).status(200)
 })
-
-router.get('/redis/keys', async (req, res) => {
-  const keys = await redisUtils.getKeys()
-  res.send(keys).status(200)
-})
-
 
 module.exports = router;

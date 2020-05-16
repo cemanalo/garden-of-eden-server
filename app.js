@@ -1,14 +1,19 @@
 const express = require("express");
+const cors = require('cors')
 const http = require("http");
 const socketIo = require("socket.io");
 const bodyParser = require('body-parser')
 const roomService = require('./services/room')
 
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 5000;
 const index = require("./routes/index");
 const gameStatus = require('./utils/gameStatus')
 
 const app = express();
+app.use(cors({
+  origin: process.env.CORS_ORIGIN,
+  methods: 'GET, PUT, POST, DELETE'
+}))
 app.use(bodyParser.json())
 app.use(index);
 
