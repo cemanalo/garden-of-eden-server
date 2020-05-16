@@ -12,3 +12,10 @@ services:
     image: "redis:alpine"
     volumes:
       - ./redis_data:/data
+  awscli:
+    image: amazon/aws-cli
+    env_file: .env
+    volumes:
+      - .:/opt/app
+      - ~/.aws:/root/.aws
+    working_dir: /opt/app

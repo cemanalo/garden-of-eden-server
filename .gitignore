@@ -1,3 +1,4 @@
 node_modules
 redis_data
 .env*
+env.qa
