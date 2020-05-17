@@ -41,6 +41,7 @@ module.exports = {
   minus10M(user, round) {
     const currentMoney = user.money
     user.money = currentMoney - 10000000
+    user.isRevealName = true
     if (!user.history) {
       user.history = []
     }

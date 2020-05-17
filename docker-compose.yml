@@ -11,7 +11,7 @@ services:
   redis:
     image: "redis:alpine"
     volumes:
-      - ./redis_data:/data
+      - ../redis_data:/data
   awscli:
     image: amazon/aws-cli
     env_file: .env
