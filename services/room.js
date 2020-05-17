@@ -84,20 +84,22 @@ module.exports = {
     const users = room.users
     const mappedUsers = await Promise.all(users.map(async (userid) => await userService.getUserByRoom(userid, roomId)))
 
-    const gold = mappedUsers.filter(user => user.round[round] === 'Gold')
-    const silver = mappedUsers.filter(user => user.round[round] === 'Silver')
-    const red = mappedUsers.filter(user => user.round[round] === 'Red')
+    const gold = mappedUsers.filter(user => user.round && user.round[round] === 'Gold')
+    const silver = mappedUsers.filter(user => user.round && user.round[round] === 'Silver')
+    const red = mappedUsers.filter(user => user.round && user.round[round] === 'Red')
 
     const outcome = rules.getOutCome(gold, silver, red)
 
     switch(outcome) {
       case 'GOLD_SILVER': {
-        const winner = gold.length > silver.length ? 'GOLD' : 'SILVER'
-        if(winner === "GOLD") {
+        if(gold.length > silver.length) {
           gold.map(user => rules.add1M(user, round))
           silver.map(user => rules.minus1M(user, round))
-        } else {
+        } else if (silver.length > gold.length) {
           silver.map(user => rules.add1M(user, round))
+          gold.map(user => rules.minus1M(user, round))
+        } else {
+          silver.map(user => rules.minus1M(user, round))
           gold.map(user => rules.minus1M(user, round))
         }
         break

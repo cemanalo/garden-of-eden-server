@@ -21,8 +21,9 @@ module.exports = {
       separator: " "
     }); // red donkey
     const money = 1000000 // 1 million
+    const round = []
     const body = {
-      userId, name, secretName, money, dateJoined: new Date()
+      userId, name, secretName, money, round, dateJoined: new Date()
     }
     await setAsync(formatKey(userId, roomId), JSON.stringify(body))
 
