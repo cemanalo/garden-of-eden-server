@@ -8,7 +8,7 @@ module.exports = {
       return 'ALL_SILVER'
     } else if(!gold.length && !silver.length && red.length > 2) {
       return 'ALL_RED'
-    } else if (gold.length && silver.length && red.length) {
+    } else if ((gold.length || silver.length) && red.length) {
       return red.length > 1 ? 'TWO_RED' : 'ONE_RED'
     } else if ((gold.length ^ silver.length) && red.length) {
       return 'ONE_GOLD_XOR_SILVER'
